@@ -18,7 +18,7 @@ export default function Detail() {
                         -translate-x-1/2 -translate-y-1/2
                         rounded-4xl hover:cursor-pointer
                         px-26 py-26"
-                onClick={() => alert("heartland")}
+                onClick={() => alert("안녕하세요. 클릭해서 모달 메시지가 나타날 예정이에요. 모달은 구현 중이에요")}
             >
             </button>
         </div>
