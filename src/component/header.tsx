@@ -17,7 +17,7 @@ export default function Header() {
                     className="text-lg font-extrabold tracking-tight hover:opacity-90"
                     aria-label="Go Home"
                 >
-                    XANDHEART
+                    HEARTLAND
                 </Link>
 
                 {/* 모바일 햄버거 버튼 */}
