@@ -44,6 +44,20 @@ export default function Detail() {
                 open={open}
                 message={randomMessage}
             />
+
+            {!open && (
+                <div className="absolute bottom-20 left-1/2 -translate-x-1/2 w-full px-4 flex justify-center">
+                    <div
+                        className="bg-[#ffd427] text-black
+                           px-4 py-2 rounded-3xl font-bold shadow-lg
+                           text-center text-sm
+                           max-w-md break-words
+                           animate-[fadeBlink_2.4s_ease-in-out_infinite]"
+                    >
+                        중앙에 있는 나무를 클릭해보세요!
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
