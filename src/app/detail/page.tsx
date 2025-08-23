@@ -1,5 +1,6 @@
-import Image from "next/image";
+"use client"
 
+import Image from "next/image";
 
 export default function Detail() {
     return (
@@ -12,6 +13,14 @@ export default function Detail() {
                 className="object-cover"
             />
 
+            <button
+                className="absolute left-1/2 top-[40%]
+                        -translate-x-1/2 -translate-y-1/2
+                        rounded-4xl hover:cursor-pointer
+                        px-26 py-26"
+                onClick={() => alert("heartland")}
+            >
+            </button>
         </div>
     )
 }
