@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { loadProfile, saveProfile } from "@/util/profileStorage";
 
 enum Step {
@@ -10,9 +10,10 @@ enum Step {
 
 export default function ProfileModal() {
     const [open, setOpen] = useState(false);
+    const [showEnter, setShowEnter] = useState(false);
+    const [showLeaving, setShowLeaving] = useState(false);
     const [step, setStep] = useState<Step>(Step.AskName);
     const [name, setName] = useState("");
-    const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         const profile = loadProfile();
@@ -23,7 +24,12 @@ export default function ProfileModal() {
     }, []);
 
     useEffect(() => {
-        if (open) inputRef.current?.focus();
+        if (open) {
+            const t = requestAnimationFrame(() => setShowEnter(true));
+            return () => cancelAnimationFrame(t);
+        } else {
+            setShowEnter(false);
+        }
     }, [open]);
 
     if (!open) return null;
@@ -41,21 +47,21 @@ export default function ProfileModal() {
 
         try {
             saveProfile(name);
-            setOpen(false);
+            setShowLeaving(true);
+            setTimeout(() => setOpen(false), 300);
         } catch (err) {
             console.error("프로필 저장 중 에러 발생", err);
         }
     };
 
     return (
-        <ModalShell>
+        <ModalShell showEnter={showEnter} showLeaving={showLeaving}>
             <form onSubmit={handleSubmit} className="space-y-5 text-center">
                 {step === Step.AskName ? (
                     <>
                         <p className="text-sm text-stone-600">당신의 이야기를 담을 이름을 알려주세요</p>
                         <div className="rounded-xl ring-1 ring-stone-200 bg-white/80 focus-within:ring-yellow-300/80">
                             <input
-                                ref={inputRef}
                                 type="text"
                                 maxLength={30}
                                 value={name}
@@ -92,15 +98,33 @@ export default function ProfileModal() {
 }
 
 /** 공통 모달 셸: 오버레이 + 박스 레이아웃 */
-function ModalShell({ children }: { children: React.ReactNode }) {
+function ModalShell({ children, showEnter, showLeaving }: { children: React.ReactNode, showEnter: boolean, showLeaving: boolean }) {
+    const panelState = showLeaving
+        ? "opacity-0 scale-95"
+        : showEnter
+            ? "opacity-100 scale-100"
+            : "opacity-0 scale-95";
+
+    const overlayState = showLeaving ? "opacity-0" : "opacity-100";
+
     return (
         <div className="fixed inset-0 z-50" role="dialog" aria-modal="true">
             {/* 오버레이 */}
-            <div className="absolute inset-0 bg-black/40 backdrop-blur-[1px]" />
+            <div
+                className={[
+                    "absolute inset-0 bg-black/40 backdrop-blur-[1px]",
+                    "transition-opacity duration-300 ease-out",
+                    overlayState,
+                ].join(" ")}
+            />
             {/* 모달 박스 */}
             <div
-                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
-                            min-w-[400px] min-h-[150px] rounded-2xl p-6 bg-white shadow-lg"
+                className={[
+                    "absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2",
+                    "min-w-[400px] min-h-[150px] rounded-2xl p-6 bg-white shadow-lg",
+                    "transition-all duration-300 ease-out",
+                    panelState,
+                ].join(" ")}
             >
                 {children}
             </div>

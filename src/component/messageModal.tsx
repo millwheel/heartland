@@ -10,16 +10,16 @@ type Props = {
 };
 
 export default function MessageModal({ open, message }: Props) {
-    const [showAnim, setShowAnim] = useState(false);
+    const [showAnimation, setShowAnimation] = useState(false);
     const [name, setName] = useState('');
 
     useEffect(() => {
         if (open) {
             // 다음 프레임에 애니메이션 트리거
-            const t = requestAnimationFrame(() => setShowAnim(true));
+            const t = requestAnimationFrame(() => setShowAnimation(true));
             return () => cancelAnimationFrame(t);
         } else {
-            setShowAnim(false);
+            setShowAnimation(false);
         }
 
         try {
@@ -55,8 +55,8 @@ export default function MessageModal({ open, message }: Props) {
                     "shadow-[0_12px_40px_rgba(255,200,0,0.25)]",
                     "ring-1 ring-yellow-100/70",
                     "transition-all duration-300 ease-out",
-                    showAnim ? "opacity-100 scale-100" : "opacity-0 scale-95",
-                    "flex flex-col" // 👈 flex 컨테이너로 변경
+                    showAnimation ? "opacity-100 scale-100" : "opacity-0 scale-95",
+                    "flex flex-col"
                 ].join(" ")}
                 onClick={(e) => e.stopPropagation()}
             >
@@ -66,7 +66,7 @@ export default function MessageModal({ open, message }: Props) {
 
                 <Link
                     href="/"
-                    className="bg-[#ffd427] font-semibold px-4 py-2 rounded-lg mt-auto mx-auto text-center w-40" // 👈 mt-auto로 아래 붙임
+                    className="bg-[#ffd427] font-semibold px-4 py-2 rounded-lg mt-auto mx-auto text-center w-40"
                 >
                     오늘은 여기까지
                 </Link>
