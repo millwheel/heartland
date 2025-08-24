@@ -23,7 +23,6 @@ export function loadProfile(): HeartlandProfile | null {
 
 export function saveProfile(name: string): HeartlandProfile {
     if (!isBrowser()) throw new Error("localStorage is not available (SSR).");
-    validateName(name);
     const profile: HeartlandProfile = {
         schema: 1,
         name: name,
@@ -39,9 +38,4 @@ export function clearProfile() {
 
 function isBrowser() {
     return typeof window !== "undefined";
-}
-
-function validateName(input: string) {
-    if (input.length === 0) throw new Error("이름은 비워둘 수 없습니다.");
-    if (input.length > 30) throw new Error("이름은 30자 이내여야 합니다.");
 }
