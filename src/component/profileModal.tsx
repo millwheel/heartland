@@ -11,7 +11,7 @@ enum Step {
 export default function ProfileModal() {
     const [open, setOpen] = useState(false);
     const [step, setStep] = useState<Step>(Step.AskName);
-    const [nameInput, setNameInput] = useState("");
+    const [name, setName] = useState("");
     const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
@@ -28,7 +28,7 @@ export default function ProfileModal() {
 
     if (!open) return null;
 
-    const canSubmitName = nameInput.length > 1 && nameInput.length <= 10;
+    const canSubmitName = name.length > 1 && name.length <= 10;
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -40,7 +40,7 @@ export default function ProfileModal() {
         }
 
         try {
-            saveProfile(nameInput);
+            saveProfile(name);
             setOpen(false);
         } catch (err) {
             console.error("프로필 저장 중 에러 발생", err);
@@ -58,8 +58,8 @@ export default function ProfileModal() {
                                 ref={inputRef}
                                 type="text"
                                 maxLength={30}
-                                value={nameInput}
-                                onChange={(e) => setNameInput(e.target.value)}
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
                                 placeholder="이름 또는 닉네임"
                                 aria-label="이름 또는 닉네임"
                                 className="w-full px-4 py-3 rounded-xl outline-none placeholder:text-stone-400 bg-transparent"
@@ -76,7 +76,7 @@ export default function ProfileModal() {
                     </>
                 ) : (
                     <>
-                        <p className="text-base text-stone-800">{nameInput}님, 현재 감정은 무슨 감정인가요?</p>
+                        <p className="text-base text-stone-800">{name}님, 현재 감정은 무슨 감정인가요?</p>
                         <button
                             type="submit"
                             className="items-center justify-center rounded-2xl px-6 py-3 font-semibold transition

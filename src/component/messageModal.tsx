@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
+import {loadProfile} from "@/util/profileStorage";
 
 type Props = {
     open: boolean;
@@ -10,9 +10,8 @@ type Props = {
 };
 
 export default function MessageModal({ open, message }: Props) {
-    const router = useRouter();
-    // 등장 애니메이션용 내부 상태 (mount 직후 scale/opacity 전환)
     const [showAnim, setShowAnim] = useState(false);
+    const [name, setName] = useState('');
 
     useEffect(() => {
         if (open) {
@@ -22,6 +21,18 @@ export default function MessageModal({ open, message }: Props) {
         } else {
             setShowAnim(false);
         }
+
+        try {
+            const profile = loadProfile();
+            if (profile == null) {
+                setName('');
+            } else {
+                setName(profile.name);
+            }
+        } catch (e) {
+            console.error("프로필 가져오기 에러");
+        }
+
     }, [open]);
 
     if (!open) return null;
@@ -38,7 +49,7 @@ export default function MessageModal({ open, message }: Props) {
                 className={[
                     "relative z-[1001]",
                     "min-w-[400px]",
-                    "min-h-[200px]",
+                    "min-h-[150px]",
                     "rounded-2xl p-5",
                     "bg-[#FFF8E6]",
                     "shadow-[0_12px_40px_rgba(255,200,0,0.25)]",
@@ -50,7 +61,7 @@ export default function MessageModal({ open, message }: Props) {
                 onClick={(e) => e.stopPropagation()}
             >
                 <p className="text-base text-stone-800 text-center mt-2">
-                    {message}
+                    {name}님, {message}
                 </p>
 
                 <Link
