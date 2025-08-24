@@ -17,3 +17,19 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+@keyframes blinkGlow {
+  0%, 100% { opacity: 0.2; transform: translateZ(0); }
+  50%      { opacity: 0.9;    transform: translateZ(0); }
+}
+
+.blink-glow {
+  animation: blinkGlow 2.4s ease-in-out infinite;
+}
+
+/* 모션 최소화 설정을 존중 */
+@media (prefers-reduced-motion: reduce) {
+  .blink-glow {
+    animation: none !important;
+  }
+}

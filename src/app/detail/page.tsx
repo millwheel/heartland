@@ -1,8 +1,9 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import {useEffect, useMemo, useState} from "react";
 import MessageModal from "@/component/messageModal";
+import {BottomOverlayHint} from "@/component/bottomOverlayHint";
 
 const MESSAGES = [
     "오늘 충분히 잘해냈어요.",
@@ -15,6 +16,12 @@ const MESSAGES = [
 
 export default function Detail() {
     const [open, setOpen] = useState(false);
+    const [showHint, setShowHint] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => setShowHint(true), 3000);
+        return () => clearTimeout(timer);
+    }, []);
 
     const randomMessage = useMemo(() => {
         const i = Math.floor(Math.random() * MESSAGES.length);
@@ -45,18 +52,8 @@ export default function Detail() {
                 message={randomMessage}
             />
 
-            {!open && (
-                <div className="absolute bottom-20 left-1/2 -translate-x-1/2 w-full px-4 flex justify-center">
-                    <div
-                        className="bg-[#ffd427] text-black
-                           px-4 py-2 rounded-3xl font-bold shadow-lg
-                           text-center text-sm
-                           max-w-md break-words
-                           animate-[fadeBlink_2.4s_ease-in-out_infinite]"
-                    >
-                        중앙에 있는 나무를 클릭해보세요!
-                    </div>
-                </div>
+            {showHint && !open && (
+                <BottomOverlayHint />
             )}
         </div>
     );
