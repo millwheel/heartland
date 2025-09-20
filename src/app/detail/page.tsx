@@ -33,8 +33,7 @@ export default function Detail() {
             <Image
                 src="/image/heartland_tree.png"
                 alt="Heartland_tree"
-                width={300}
-                height={300}
+                fill
                 priority
                 className="object-cover"
             />

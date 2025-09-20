@@ -26,12 +26,26 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Header />
-        <ProfileModal />
-        {children}
+      <head>
+        {/* 모바일 렌더링 기본 세팅 */}
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+      </head>
+      <body className="min-h-screen bg-stone-100">
+      {/* 배경은 넓게, 실제 UI는 '폰 폭'으로 제한 */}
+        <div className="min-h-dvh flex justify-center">
+          <div
+              className={[
+                "w-full max-w-[420px] min-h-dvh", // 폰 폭 고정
+                "shadow-xl",              // 카드처럼 떠보이게(선택)
+                // "pt-[max(16px,env(safe-area-inset-top))]",
+                // "pb-[max(16px,env(safe-area-inset-bottom))]",
+              ].join(" ")}
+          >
+            <Header />
+            <ProfileModal />
+            {children}
+          </div>
+        </div>
       </body>
     </html>
   );

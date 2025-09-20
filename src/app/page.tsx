@@ -37,8 +37,7 @@ export default function Home() {
                 <Image
                     src="/image/heartland.png"
                     alt="Heartland"
-                    width={550}
-                    height={300}
+                    fill
                     priority
                     className="object-cover [object-position:49%_58%]"
                 />

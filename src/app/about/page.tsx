@@ -6,8 +6,7 @@ export default function About() {
             <Image
                 src="/image/heartland.png"
                 alt="Heartland"
-                width={300}
-                height={300}
+                fill
                 className="object-cover [object-position:49%_58%]"
             />
 
