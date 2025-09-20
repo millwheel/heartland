@@ -15,8 +15,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Heartland",
-  description: "Heartland",
+    title: "Heartland",
+    description: "Heartland",
+    viewport: {
+        width: "device-width",
+        initialScale: 1,
+        viewportFit: "cover"
+    },
 };
 
 export default function RootLayout({
@@ -26,11 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <head>
-        {/* 모바일 렌더링 기본 세팅 */}
-        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-      </head>
-      <body className="min-h-screen bg-stone-100">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
       {/* 배경은 넓게, 실제 UI는 '폰 폭'으로 제한 */}
         <div className="min-h-dvh flex justify-center">
           <div
