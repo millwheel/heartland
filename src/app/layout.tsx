@@ -37,7 +37,7 @@ export default function RootLayout({
           <div
               className={[
                 "w-full max-w-[420px] min-h-dvh", // 폰 폭 고정
-                "shadow-xl",              // 카드처럼 떠보이게(선택)
+                "shadow-xl shadow-black/40",              // 카드처럼 떠보이게(선택)
                 // "pt-[max(16px,env(safe-area-inset-top))]",
                 // "pb-[max(16px,env(safe-area-inset-bottom))]",
               ].join(" ")}
