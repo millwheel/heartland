@@ -31,9 +31,10 @@ export default function Detail() {
     return (
         <div className="relative min-h-screen">
             <Image
-                src="/image/heartland_sub.png"
+                src="/image/heartland_tree.png"
                 alt="Heartland_tree"
-                fill
+                width={300}
+                height={300}
                 priority
                 className="object-cover"
             />

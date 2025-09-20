@@ -10,7 +10,7 @@ export default function Header() {
 
     return (
         <header className="sticky top-0 z-50 w-full bg-[#ffd427] text-black shadow-md">
-            <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
+            <div className="mx-auto flex h-14 max-w-xl items-center justify-between px-4">
                 {/* 좌측 브랜드 */}
                 <Link
                     href="/"

@@ -28,16 +28,17 @@ export default function Home() {
             {/* 배경 이미지를 감싸는 컨테이너에 scale 트랜지션 */}
             <div
                 className={[
-                    "absolute inset-0",
+                    "absolute inset-0 flex items-center justify-center",
                     "transition-transform duration-500 ease-[cubic-bezier(.22,.61,.36,1)]",
                     "will-change-transform",
                     leaving ? "scale-[1.3]" : "scale-100",
                 ].join(" ")}
             >
                 <Image
-                    src="/image/heartland_main.png"
+                    src="/image/heartland.png"
                     alt="Heartland"
-                    fill
+                    width={550}
+                    height={300}
                     priority
                     className="object-cover [object-position:49%_58%]"
                 />
@@ -49,7 +50,7 @@ export default function Home() {
                 className="absolute left-1/2 top-[40%]
                    -translate-x-1/2 -translate-y-1/2
                    rounded-4xl hover:cursor-pointer
-                   px-26 py-26"
+                   px-30 py-26"
                 aria-label="상세로 이동"
             />
 

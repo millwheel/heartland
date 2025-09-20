@@ -4,9 +4,10 @@ export default function About() {
     return (
         <div className="relative min-h-screen">
             <Image
-                src="/image/heartland_main.png"
+                src="/image/heartland.png"
                 alt="Heartland"
-                fill
+                width={300}
+                height={300}
                 className="object-cover [object-position:49%_58%]"
             />
 
