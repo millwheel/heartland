@@ -3,7 +3,6 @@
 import Image from "next/image";
 import {useMemo, useState} from "react";
 import { messages, type Message } from "@/data/messages";
-import MessageModal from "@/component/messageModal";
 
 export default function Detail() {
     const [open, setOpen] = useState(false);
@@ -22,29 +21,47 @@ export default function Detail() {
     }, [randomMessage, name]);
 
     return (
-        <div className="relative min-h-screen">
+        <div className="relative min-h-screen overflow-hidden">
+            {/* 배경 */}
             <Image
                 src="/image/heartland_tree.png"
                 alt="Heartland_tree"
                 fill
                 priority
-                className="object-cover"
+                className="object-cover z-0"
             />
 
-            {/* 투명 클릭 영역 (나무 클릭) */}
+            {/* 포스트잇 이미지 */}
+            <div className="absolute left-1/2 top-[45%] -translate-x-1/2 -translate-y-1/2 overflow-hidden">
+                <Image
+                    src="/image/post_it.png"
+                    alt="포스트잇"
+                    width={140}
+                    height={140}
+                    className="z-10"
+                />
+
+                {/* open 시 메시지 표시 */}
+                {open && (
+                    <p
+                        className="absolute inset-0 flex items-center justify-center
+                       text-center font-semibold text-stone-800
+                       leading-relaxed p-3 z-20"
+                    >
+                        {displayedText}
+                    </p>
+                )}
+            </div>
+
+            {/* 메시지 버튼 */}
             <button
-                className="absolute left-1/2 top-[40%]
-                   -translate-x-1/2 -translate-y-1/2
-                   rounded-4xl hover:cursor-pointer
-                   px-26 py-26"
-                onClick={() => setOpen(true)}
-            />
-
-            <MessageModal
-                open={open}
-                message={displayedText}
-            />
-
+                onClick={() => setOpen((prev) => !prev)}
+                className="absolute bottom-[15%] left-1/2 -translate-x-1/2
+                   bg-[#ffd427] text-black font-bold px-6 py-3 rounded-2xl
+                   shadow-lg z-30 active:scale-95 transition cursor-pointer"
+            >
+                {open ? "하트랜드로 돌아가기" : "오늘의 메세지 받아보기"}
+            </button>
         </div>
     );
 }
