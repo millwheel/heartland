@@ -3,15 +3,33 @@
 import Image from "next/image";
 import BottomActionButton from "@/component/bottomActionButton";
 import {useRouter} from "next/navigation";
-import {useMemo, useState} from "react";
+import {useEffect, useMemo, useState} from "react";
 import {pacifico} from "@/font/pacifico";
 import FadeUpWrapper from "@/component/fadeUpWrapper";
+import {loadProfile, saveProfile} from "@/util/profileStorage";
 
 type Phase = 0 | 1 | 2;
 
 export default function Profile() {
     const router = useRouter();
     const [phase, setPhase] = useState<Phase>(0);
+    const [name, setName] = useState("");
+
+    useEffect(() => {
+        const profile = loadProfile();
+        if (!profile) {
+        }
+    }, []);
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+
+        try {
+            saveProfile(name);
+        } catch (err) {
+            console.error("프로필 저장 중 에러 발생", err);
+        }
+    };
 
 
     const buttonText = useMemo(() => {
@@ -47,7 +65,7 @@ export default function Profile() {
 
             <div className="absolute inset-0 z-10">
                 {phase === 0 && (
-                    <div className={`${pacifico.className} text-6xl mt-40 mx-10 flex flex-col gap-3 text-3xl text-[#f9e7c4] text-center`}>
+                    <div className={`${pacifico.className} text-6xl mt-40 mx-10 flex flex-col gap-3 text-[#f9e7c4] text-center`}>
                         <FadeUpWrapper>
                             <span>
                                 Welcome
@@ -69,14 +87,14 @@ export default function Profile() {
                 {phase === 1 && (
                     <div className="mt-40 mx-10 flex flex-col gap-3 text-3xl font-semibold text-[#f9e7c4] text-center">
                         <FadeUpWrapper delay={100}>
-                            <span>
-                                당신의 이야기를 담을
-                            </span>
+                        <span>
+                            당신의 이야기를 담을
+                        </span>
                         </FadeUpWrapper>
                         <FadeUpWrapper delay={200}>
-                            <span>
-                                이름을 알려주세요
-                            </span>
+                        <span>
+                            이름을 알려주세요
+                        </span>
                         </FadeUpWrapper>
                     </div>
                 )}
@@ -101,6 +119,30 @@ export default function Profile() {
                     </div>
                 )}
             </div>
+
+            {phase === 1 && (
+                <div className="absolute bottom-[35%] left-1/2 -translate-x-1/2 z-20">
+                    <div
+                        className="
+                            w-72 h-14 rounded-4xl
+                            bg-white/80 backdrop-blur-sm
+                            border-4 border-transparent
+                            focus-within:border-[rgba(248,187,51,0.6)]
+                            transition-colors duration-300 ease-out
+                        "
+                    >
+                        <input
+                            type="text"
+                            maxLength={30}
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder="이름 또는 닉네임"
+                            aria-label="이름 또는 닉네임"
+                            className="w-full text-center rounded-4xl outline-none text-lg leading-[3rem] placeholder:text-stone-400 bg-transparent"
+                        />
+                    </div>
+                </div>
+            )}
             
             <BottomActionButton onClick={handleButtonClick} text={buttonText} />
         </div>
