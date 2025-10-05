@@ -66,7 +66,7 @@ export default function Detail() {
                 )}
             </div>
 
-            <BottomActionButton onClick={handleButtonClick} text={buttonText} />
+            <BottomActionButton onClick={handleButtonClick} text={buttonText} position={"bottom-[10%]"} width={"min-w-[250px]"}/>
         </div>
     );
 }

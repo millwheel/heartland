@@ -165,7 +165,7 @@ export default function Profile() {
                 </p>
             )}
             
-            <BottomActionButton onClick={handleButtonClick} text={buttonText} />
+            <BottomActionButton onClick={handleButtonClick} text={buttonText} position={"bottom-[20%]"}/>
         </div>
     );
 }
