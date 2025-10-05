@@ -2,24 +2,24 @@
 
 import Image from "next/image";
 import {useMemo, useState} from "react";
+import { messages, type Message } from "@/data/messages";
 import MessageModal from "@/component/messageModal";
-
-const MESSAGES = [
-    "오늘 충분히 잘해냈어요.",
-    "잠시 쉬어가도 괜찮아요.",
-    "외로움도 당신의 일부예요. 함께 지나가요.",
-    "마음이 무거운 날엔, 가볍게 한 걸음만.",
-    "당신이 느끼는 감정은 모두 유효해요.",
-    "오늘의 나를 살며시 안아주세요.",
-];
 
 export default function Detail() {
     const [open, setOpen] = useState(false);
+    const [name, setName] = useState<string | null>(null);
 
-    const randomMessage = useMemo(() => {
-        const i = Math.floor(Math.random() * MESSAGES.length);
-        return MESSAGES[i]!;
+    const randomMessage: Message | null = useMemo(() => {
+        if (!messages.length) return null;
+        const i = Math.floor(Math.random() * messages.length);
+        return messages[i]!;
     }, []);
+
+    const displayedText = useMemo(() => {
+        if (!randomMessage) return "";
+        const prefix = randomMessage.personalized && name ? `${name}, ` : "";
+        return prefix + randomMessage.text;
+    }, [randomMessage, name]);
 
     return (
         <div className="relative min-h-screen">
@@ -42,7 +42,7 @@ export default function Detail() {
 
             <MessageModal
                 open={open}
-                message={randomMessage}
+                message={displayedText}
             />
 
         </div>

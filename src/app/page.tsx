@@ -1,23 +1,17 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
     const [leaving, setLeaving] = useState(false);
     const router = useRouter();
 
-    useEffect(() => {
-        const timer = setTimeout(() => setShowHint(true), 3000);
-        return () => clearTimeout(timer);
-    }, []);
 
     function handleGoDetail() {
         if (leaving) return;          // 중복 클릭 방지
         setLeaving(true);             // 확대 애니메이션 시작
-        setShowHint(false);           // 힌트 숨김(선택)
-        // 트랜지션 시간(아래 duration-500과 맞춰주세요)
         setTimeout(() => router.push("/detail"), 500);
     }
 
