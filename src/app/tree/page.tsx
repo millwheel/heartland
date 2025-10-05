@@ -4,7 +4,7 @@ import Image from "next/image";
 import {useMemo, useState} from "react";
 import { useRouter } from "next/navigation";
 import { messages, type Message } from "@/data/messages";
-import CommonButton from "@/component/commonButton";
+import BottomActionButton from "@/component/bottomActionButton";
 
 export default function Detail() {
     const [open, setOpen] = useState(false);
@@ -66,7 +66,7 @@ export default function Detail() {
                 )}
             </div>
 
-            <CommonButton onClick={handleButtonClick} text={buttonText} />
+            <BottomActionButton onClick={handleButtonClick} text={buttonText} />
         </div>
     );
 }
