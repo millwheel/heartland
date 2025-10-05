@@ -30,7 +30,7 @@ export default function Home() {
                 <div className="absolute inset-0 overflow-hidden">
                     {/* 배경 이미지 (스케일은 여기만!) */}
                     <Image
-                        src="/image/heartland.png"
+                        src="/image/heartland_main.png"
                         alt="Heartland"
                         fill
                         priority
