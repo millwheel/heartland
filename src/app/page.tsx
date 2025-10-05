@@ -3,10 +3,8 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import {BottomOverlayHint} from "@/component/bottomOverlayHint";
 
 export default function Home() {
-    const [showHint, setShowHint] = useState(false);
     const [leaving, setLeaving] = useState(false);
     const router = useRouter();
 
@@ -53,9 +51,6 @@ export default function Home() {
                 aria-label="상세로 이동"
             />
 
-            {showHint && !leaving && (
-                <BottomOverlayHint />
-            )}
         </main>
     );
 }

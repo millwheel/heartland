@@ -3,7 +3,6 @@
 import Image from "next/image";
 import {useEffect, useMemo, useState} from "react";
 import MessageModal from "@/component/messageModal";
-import {BottomOverlayHint} from "@/component/bottomOverlayHint";
 
 const MESSAGES = [
     "오늘 충분히 잘해냈어요.",
@@ -16,7 +15,6 @@ const MESSAGES = [
 
 export default function Detail() {
     const [open, setOpen] = useState(false);
-    const [showHint, setShowHint] = useState(false);
 
     useEffect(() => {
         const timer = setTimeout(() => setShowHint(true), 3000);
@@ -52,9 +50,6 @@ export default function Detail() {
                 message={randomMessage}
             />
 
-            {showHint && !open && (
-                <BottomOverlayHint />
-            )}
         </div>
     );
 }
