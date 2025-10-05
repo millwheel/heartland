@@ -48,13 +48,28 @@ export default function Home() {
                 </div>
             </div>
 
-            {/* 투명 클릭 영역 */}
             <button
                 onClick={handleGoTree}
-                className="absolute left-1/2 top-[40%]
+                className="absolute left-1/2 top-[43%]
                    -translate-x-1/2 -translate-y-1/2
                    rounded-4xl hover:cursor-pointer
-                   px-30 py-26"
+                   px-30 py-22 bg-red-500/30"
+            />
+
+            <button
+                onClick={handleGoTrain}
+                className="absolute left-1/5 top-[60%]
+                    -translate-x-1/2 -translate-y-1/2
+                   rounded-4xl hover:cursor-pointer
+                   px-10 py-8 bg-red-500/30"
+            />
+
+            <button
+                onClick={handleGoHouse}
+                className="absolute left-4/5 top-[70%]
+                    -translate-x-7 -translate-y-15
+                   rounded-4xl hover:cursor-pointer
+                   px-10 py-10 bg-red-500/30"
             />
 
         </main>
