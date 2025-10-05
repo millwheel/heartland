@@ -2,11 +2,13 @@
 
 import Image from "next/image";
 import {useMemo, useState} from "react";
+import { useRouter } from "next/navigation";
 import { messages, type Message } from "@/data/messages";
 
 export default function Detail() {
     const [open, setOpen] = useState(false);
     const [name, setName] = useState<string | null>(null);
+    const router = useRouter();
 
     const randomMessage: Message | null = useMemo(() => {
         if (!messages.length) return null;
@@ -19,6 +21,14 @@ export default function Detail() {
         const prefix = randomMessage.personalized && name ? `${name}, ` : "";
         return prefix + randomMessage.text;
     }, [randomMessage, name]);
+
+    const handleButtonClick = () => {
+        if (open) {
+            router.push("/");
+        } else {
+            setOpen(true);
+        }
+    };
 
     return (
         <div className="relative min-h-screen overflow-hidden">
@@ -55,7 +65,7 @@ export default function Detail() {
 
             {/* 메시지 버튼 */}
             <button
-                onClick={() => setOpen((prev) => !prev)}
+                onClick={handleButtonClick}
                 className="absolute bottom-[15%] left-1/2 -translate-x-1/2
                    bg-[#ffd427] text-black font-bold px-6 py-3 rounded-2xl
                    shadow-lg z-30 active:scale-95 transition cursor-pointer"

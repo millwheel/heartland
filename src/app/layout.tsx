@@ -17,11 +17,6 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
     title: "Heartland",
     description: "Heartland",
-    viewport: {
-        width: "device-width",
-        initialScale: 1,
-        viewportFit: "cover"
-    },
 };
 
 export default function RootLayout({
