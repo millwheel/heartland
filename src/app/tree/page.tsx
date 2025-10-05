@@ -35,7 +35,7 @@ export default function Detail() {
             {/* 배경 */}
             <Image
                 src="/image/heartland_tree.png"
-                alt="Heartland_tree"
+                alt="나무 배경"
                 fill
                 priority
                 className="object-cover z-0"

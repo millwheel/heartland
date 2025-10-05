@@ -9,11 +9,24 @@ export default function Home() {
     const router = useRouter();
 
 
-    function handleGoDetail() {
-        if (leaving) return;          // 중복 클릭 방지
-        setLeaving(true);             // 확대 애니메이션 시작
-        setTimeout(() => router.push("/detail"), 500);
+    function handleGoTree() {
+        if (leaving) return;
+        setLeaving(true);
+        setTimeout(() => router.push("/tree"), 500);
     }
+
+    function handleGoTrain() {
+        if (leaving) return;
+        setLeaving(true);
+        setTimeout(() => router.push("/train"), 500);
+    }
+
+    function handleGoHouse() {
+        if (leaving) return;
+        setLeaving(true);
+        setTimeout(() => router.push("/house"), 500);
+    }
+
 
     return (
         <main className="relative min-h-screen">
@@ -35,14 +48,13 @@ export default function Home() {
                 </div>
             </div>
 
-            {/* 투명 클릭 영역: 배경 확대 후 이동 */}
+            {/* 투명 클릭 영역 */}
             <button
-                onClick={handleGoDetail}
+                onClick={handleGoTree}
                 className="absolute left-1/2 top-[40%]
                    -translate-x-1/2 -translate-y-1/2
                    rounded-4xl hover:cursor-pointer
                    px-30 py-26"
-                aria-label="상세로 이동"
             />
 
         </main>
