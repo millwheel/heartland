@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import {useEffect, useMemo, useState} from "react";
+import {useMemo, useState} from "react";
 import MessageModal from "@/component/messageModal";
 
 const MESSAGES = [
@@ -15,11 +15,6 @@ const MESSAGES = [
 
 export default function Detail() {
     const [open, setOpen] = useState(false);
-
-    useEffect(() => {
-        const timer = setTimeout(() => setShowHint(true), 3000);
-        return () => clearTimeout(timer);
-    }, []);
 
     const randomMessage = useMemo(() => {
         const i = Math.floor(Math.random() * MESSAGES.length);
