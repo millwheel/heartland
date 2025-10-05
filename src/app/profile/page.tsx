@@ -5,6 +5,7 @@ import BottomActionButton from "@/component/bottomActionButton";
 import {useRouter} from "next/navigation";
 import {useMemo, useState} from "react";
 import {pacifico} from "@/font/pacifico";
+import FadeUpWrapper from "@/component/fadeUpWrapper";
 
 type Phase = 0 | 1 | 2;
 
@@ -46,35 +47,57 @@ export default function Profile() {
 
             <div className="absolute inset-0 z-10">
                 {phase === 0 && (
-                    <div className="mt-40 mx-10 flex flex-col gap-3 text-3xl text-[#f9e7c4] text-center">
-                        <p className={`${pacifico.className} text-6xl font-normal leading-snug text-[#f9e7c4]`}>
-                            Welcome <br/> to <br/> heartland
-                        </p>
+                    <div className={`${pacifico.className} text-6xl mt-40 mx-10 flex flex-col gap-3 text-3xl text-[#f9e7c4] text-center`}>
+                        <FadeUpWrapper>
+                            <span>
+                                Welcome
+                            </span>
+                        </FadeUpWrapper>
+                        <FadeUpWrapper delay={600}>
+                            <span>
+                                to
+                            </span>
+                        </FadeUpWrapper>
+                        <FadeUpWrapper delay={1000}>
+                            <span>
+                                heartland
+                            </span>
+                        </FadeUpWrapper>
                     </div>
                 )}
 
                 {phase === 1 && (
                     <div className="mt-40 mx-10 flex flex-col gap-3 text-3xl font-semibold text-[#f9e7c4] text-center">
-                        <span>
-                            당신의 이야기를 담을
-                        </span>
-                        <span>
-                            이름을 알려주세요
-                        </span>
+                        <FadeUpWrapper delay={100}>
+                            <span>
+                                당신의 이야기를 담을
+                            </span>
+                        </FadeUpWrapper>
+                        <FadeUpWrapper delay={200}>
+                            <span>
+                                이름을 알려주세요
+                            </span>
+                        </FadeUpWrapper>
                     </div>
                 )}
 
                 {phase === 2 && (
                     <div className="mt-40 mx-10 flex flex-col gap-5 text-4xl font-bold text-[#f9e7c4]">
-                        <p>
-                            ...님,
-                        </p>
-                        <p>
-                            당신의 하루에 따뜻한
-                        </p>
-                        <p>
-                            순간을 준비했어요
-                        </p>
+                        <FadeUpWrapper delay={100}>
+                            <span>
+                                ...님,
+                            </span>
+                        </FadeUpWrapper>
+                        <FadeUpWrapper delay={600}>
+                            <span>
+                                당신의 하루에 따뜻한
+                            </span>
+                        </FadeUpWrapper>
+                        <FadeUpWrapper delay={1100}>
+                            <span>
+                                순간을 준비했어요
+                            </span>
+                        </FadeUpWrapper>
                     </div>
                 )}
             </div>
