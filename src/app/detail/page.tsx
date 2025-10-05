@@ -67,7 +67,7 @@ export default function Detail() {
             <button
                 onClick={handleButtonClick}
                 className="absolute bottom-[15%] left-1/2 -translate-x-1/2
-                   bg-[#ffd427] text-black font-bold px-6 py-3 rounded-2xl
+                   bg-[#ffd427] text-black font-bold px-6 py-4 rounded-4xl
                    shadow-lg z-30 active:scale-95 transition cursor-pointer"
             >
                 {open ? "하트랜드로 돌아가기" : "오늘의 메세지 받아보기"}
