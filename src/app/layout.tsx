@@ -35,7 +35,6 @@ export default function RootLayout({
               ].join(" ")}
           >
             <Header />
-            <ProfileModal />
             {children}
           </div>
         </div>

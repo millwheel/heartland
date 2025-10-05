@@ -4,6 +4,7 @@ import Image from "next/image";
 import {useMemo, useState} from "react";
 import { useRouter } from "next/navigation";
 import { messages, type Message } from "@/data/messages";
+import CommonButton from "@/component/commonButton";
 
 export default function Detail() {
     const [open, setOpen] = useState(false);
@@ -29,6 +30,8 @@ export default function Detail() {
             setOpen(true);
         }
     };
+
+    const buttonText = open ? "하트랜드로 돌아가기" : "오늘의 메세지 받아보기"
 
     return (
         <div className="relative min-h-screen overflow-hidden">
@@ -63,15 +66,7 @@ export default function Detail() {
                 )}
             </div>
 
-            {/* 메시지 버튼 */}
-            <button
-                onClick={handleButtonClick}
-                className="absolute bottom-[15%] left-1/2 -translate-x-1/2
-                   bg-[#ffd427] text-black font-bold px-6 py-4 rounded-4xl
-                   shadow-lg z-30 active:scale-95 transition cursor-pointer"
-            >
-                {open ? "하트랜드로 돌아가기" : "오늘의 메세지 받아보기"}
-            </button>
+            <CommonButton onClick={handleButtonClick} text={buttonText} />
         </div>
     );
 }
