@@ -21,9 +21,9 @@ export default function Home() {
         setTimeout(() => router.push(to), dur);
     };
 
-    const handleGoTree  = () => go("/tree", 50, 43, 1.35, 500);
-    const handleGoTrain = () => go("/train", 20, 60, 1.75, 500);
-    const handleGoHouse = () => go("/house", 80, 80, 1.55, 500);
+    const handleGoTree  = () => go("/tree", 50, 43, 1.35, 400);
+    const handleGoTrain = () => go("/train", 20, 60, 1.75, 400);
+    const handleGoHouse = () => go("/house", 80, 80, 1.55, 400);
 
     return (
         <main className="relative min-h-screen">
