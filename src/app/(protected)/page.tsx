@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import FadeOverlay from "@/component/fadeOverlay";
 
 export default function Home() {
     const [leaving, setLeaving] = useState(false);
@@ -43,6 +44,9 @@ export default function Home() {
                     }}
                 />
             </div>
+
+            {/* 입장 시 밝아지고, 퇴장 시 어두워짐 */}
+            <FadeOverlay leaving={leaving} leaveDuration={15000} />
 
             {/* 투명 클릭 영역들 */}
             <button

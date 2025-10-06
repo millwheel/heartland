@@ -21,7 +21,7 @@ export default function About() {
     const handleButtonClick = () => {
         if (leaving) return;
         setLeaving(true);
-        setTimeout(() => router.push("/"), 350);
+        setTimeout(() => router.push("/"), 300);
     };
 
     return (
@@ -35,7 +35,7 @@ export default function About() {
 
             <div className="absolute inset-0 z-0 backdrop-blur-md" />
 
-            {/* 👇 공용 오버레이 (입장 시 밝아지고, 퇴장 시 어두워짐) */}
+            {/* 입장 시 밝아지고, 퇴장 시 어두워짐 */}
             <FadeOverlay leaving={leaving} />
 
             <div className="relative z-10 min-h-screen px-6">

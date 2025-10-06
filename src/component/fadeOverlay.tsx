@@ -15,8 +15,8 @@ type FadeOverlayProps = {
  */
 export default function FadeOverlay({
                                         leaving,
-                                        enterDuration = 100,
-                                        leaveDuration = 500,
+                                        enterDuration = 200,
+                                        leaveDuration = 800,
                                     }: FadeOverlayProps) {
     const [entering, setEntering] = useState(true);
 
@@ -28,13 +28,13 @@ export default function FadeOverlay({
     return (
         <div
             className={[
-                "absolute inset-0 z-30 bg-black ease-out transition-opacity",
+                "absolute inset-0 z-30 bg-black transition-opacity",
                 // 동적 트랜지션 시간 적용
                 `duration-${leaving ? leaveDuration : enterDuration}`,
                 entering
-                    ? "opacity-60" // 진입 시 어두운 상태 → 점점 밝아짐
+                    ? "opacity-40" // 진입 시 어두운 상태 → 점점 밝아짐
                     : leaving
-                        ? "opacity-60" // 떠날 때 다시 어두워짐
+                        ? "opacity-40" // 떠날 때 다시 어두워짐
                         : "opacity-0 pointer-events-none",
             ].join(" ")}
             style={{

@@ -7,11 +7,13 @@ import { messages, type Message } from "@/data/messages";
 import BottomActionButton from "@/component/bottomActionButton";
 import PostItText from "@/component/postItText";
 import {loadProfile} from "@/util/profileStorage";
+import FadeOverlay from "@/component/fadeOverlay";
 
 export default function Detail() {
     const [open, setOpen] = useState(false);
     const [displayedText, setDisplayedText] = useState("");
     const router = useRouter();
+    const [leaving, setLeaving] = useState(false);
 
     useEffect(() => {
         const profile = loadProfile();
@@ -33,7 +35,9 @@ export default function Detail() {
 
     const handleButtonClick = () => {
         if (open) {
-            router.push("/");
+            if (leaving) return;
+            setLeaving(true);
+            setTimeout(() => router.push("/"), 300);
         } else {
             setOpen(true);
         }
@@ -51,6 +55,9 @@ export default function Detail() {
                 priority
                 className="object-cover z-0"
             />
+
+            {/* 입장 시 밝아지고, 퇴장 시 어두워짐 */}
+            <FadeOverlay leaving={leaving} />
 
             {/* 포스트잇 이미지 */}
             <div className="absolute left-1/2 top-[45%] -translate-x-1/2 -translate-y-1/2 overflow-hidden">
