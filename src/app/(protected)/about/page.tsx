@@ -1,7 +1,17 @@
+"use client"
+
 import Image from "next/image";
 import { pacifico } from "@/font/pacifico";
+import BottomActionButton from "@/component/bottomActionButton";
+import {useRouter} from "next/navigation";
 
 export default function About() {
+    const router = useRouter();
+
+    const handleButtonClick = () => {
+        router.push("/");
+    };
+
     return (
         <div className="relative min-h-screen">
             <Image
@@ -49,6 +59,7 @@ export default function About() {
                         </span>
                     </div>
                 </div>
+                <BottomActionButton onClick={handleButtonClick} text={"하트랜드로 돌아가기"} position={"bottom-[15%]"}/>
             </div>
         </div>
     );
