@@ -4,6 +4,8 @@ import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import FadeOverlay from "@/component/fadeOverlay";
+import Link from "next/link";
+import {QuestionMarkCircleIcon} from "@heroicons/react/24/solid";
 
 export default function Home() {
     const [leaving, setLeaving] = useState(false);
@@ -24,6 +26,7 @@ export default function Home() {
     const handleGoTree  = () => go("/tree", 50, 43, 1.35, 400);
     const handleGoTrain = () => go("/train", 20, 60, 1.75, 400);
     const handleGoHouse = () => go("/house", 80, 80, 1.55, 400);
+    const handleGoHow = () => router.push("/how");
 
     return (
         <main className="relative min-h-screen">
@@ -64,6 +67,18 @@ export default function Home() {
                 className="absolute left-4/5 top-[70%] -translate-x-7 -translate-y-15 rounded-4xl px-10 py-10 cursor-pointer"
                 aria-label="집으로 이동"
             />
+
+            <button
+                onClick={handleGoHow}
+                className="absolute bottom-20 left-1/2 -translate-x-1/2
+               flex items-center
+               border-4 border-[#ffd427] bg-yellow-50 text-[#613c00]
+               font-semibold rounded-3xl px-5 py-1
+               shadow-md active:scale-95 transition cursor-pointer leading-none"
+            >
+                <QuestionMarkCircleIcon className="w-7 h-7 text-[#ffd427] mr-2" />
+                하트랜드 이용방법
+            </button>
         </main>
     );
 }
