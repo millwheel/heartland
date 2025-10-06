@@ -6,10 +6,12 @@ import BottomActionButton from "@/component/bottomActionButton";
 import {useRouter} from "next/navigation";
 import {useEffect, useState} from "react";
 import {loadProfile} from "@/util/profileStorage";
+import FadeOverlay from "@/component/fadeOverlay";
 
 export default function About() {
     const router = useRouter();
     const [profile, setProfile] = useState<{ name: string } | null>(null);
+    const [leaving, setLeaving] = useState(false);
 
     useEffect(() => {
         const loaded = loadProfile();
@@ -17,7 +19,9 @@ export default function About() {
     }, []);
 
     const handleButtonClick = () => {
-        router.push("/");
+        if (leaving) return;
+        setLeaving(true);
+        setTimeout(() => router.push("/"), 350);
     };
 
     return (
@@ -30,6 +34,9 @@ export default function About() {
             />
 
             <div className="absolute inset-0 z-0 backdrop-blur-md" />
+
+            {/* 👇 공용 오버레이 (입장 시 밝아지고, 퇴장 시 어두워짐) */}
+            <FadeOverlay leaving={leaving} />
 
             <div className="relative z-10 min-h-screen px-6">
                 <div className="py-5 text-center text-[#f9e7c4]">
