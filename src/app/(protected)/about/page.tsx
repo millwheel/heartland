@@ -1,41 +1,52 @@
 import Image from "next/image";
+import { pacifico } from "@/font/pacifico";
 
 export default function About() {
     return (
         <div className="relative min-h-screen">
             <Image
-                src="/image/heartland.png"
+                src="/image/heartland_profile.png"
                 alt="Heartland"
                 fill
-                className="object-cover [object-position:49%_58%]"
+                className="object-cover"
             />
 
-            <div className="absolute inset-0 bg-white/40 z-0" />
+            <div className="absolute inset-0 z-0 backdrop-blur-md" />
 
-            <div className="relative z-10 flex flex-col items-center justify-center min-h-screen px-6">
-                <div className="max-w-2xl text-center flex flex-col space-y-30">
-                    <div>
-                        <h1 className="text-2xl font-bold mb-6">ABOUT HEARTLAND</h1>
-
-                        <p className="mb-6 flex-col space-y-2">
-                            <span className="block">
-                                하트랜드는 당신의 하루 속에서 잠시 멈춰 설 수 있는 작은 섬입니다.
-                            </span>
-                            <span className="block">
-                                하트랜드는 누구에게나 감정이 머무는 공간을 제공합니다.
-                            </span>
-                            <span className="block">
-                                외로움, 지침, 슬픔 같은 순간에도,
-                            </span>
-                            <span className="block">
-                                당신은 혼자가 아니라는 것을 보여주기 위해 존재합니다.
-                            </span>
-                        </p>
+            <div className="relative z-10 min-h-screen px-6">
+                <div className="py-5 text-center text-[#f9e7c4]">
+                    <h1 className={`text-2xl font-bold mb-20 ${pacifico.className}`}>ABOUT HEARTLAND</h1>
+                </div>
+                <div className="max-w-2xl text-center font-semibold text-xl text-[#f9e7c4]">
+                    <div className="flex-col space-y-2 mb-15">
+                        <span className="block">
+                            하트랜드는 ...님의 하루 속에서
+                        </span>
+                        <span className="block">
+                            잠시 멈춰 설 수 있는 작은 섬입니다.
+                        </span>
                     </div>
-
-                    <div className="space-y-2 font-semibold">
-                        <p>“하트랜드는 하루에 한 번만 열립니다.”</p>
-                        <p>“오늘 당신이 만나는 문장은, 오늘을 위한 단 하나의 위로입니다.”</p>
+                    <div className="flex-col space-y-2 mb-25">
+                        <span className="block">
+                            외로움, 지침, 슬픔 같은 순간에도
+                        </span>
+                        <span className="block">
+                            당신은 혼자가 아니라는 것을 보여주기
+                        </span>
+                        <span className="block">
+                            위해 존재합니다.
+                        </span>
+                    </div>
+                    <div className="flex-col space-y-2">
+                        <span className="block">
+                            우리는 위로와 응원을 디자인합니다.
+                        </span>
+                        <span className="block">
+                            당신의 하루에 따뜻한 경험을 더합니다.
+                        </span>
+                        <span className={`block ${pacifico.className}`}>
+                            XANDHEART
+                        </span>
                     </div>
                 </div>
             </div>
