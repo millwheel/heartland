@@ -140,7 +140,7 @@ export default function House() {
                         {animateCircles && (
                             <div
                                 key={`beat-${remainingSec}`} // 매 초 리마운트 → 애니메이션 재시작
-                                className="absolute w-56 h-56 rounded-full bg-[#f8bb33]/50 animate-[circleGrow_1s_ease-out_forwards]"
+                                className="absolute w-56 h-56 rounded-full bg-[#f8bb33]/50 animate-[circleGrow_4s_ease-out_forwards]"
                             />
                         )}
                         {doneCircles && (
@@ -156,8 +156,8 @@ export default function House() {
                             <div className="bg-transparent font-extrabold text-3xl">수고하셨어요!</div>
                         ) : (
                             <div className="bg-transparent">
-                                <div className="text-5xl font-extrabold mb-1">{remainingSec}</div>
-                                <div className="text-xl font-extrabold">{phaseText}</div>
+                                <div className="text-3xl font-extrabold mb-1">{remainingSec}초 동안</div>
+                                <div className="text-3xl font-extrabold">{phaseText}</div>
                             </div>
                         )}
                     </div>
