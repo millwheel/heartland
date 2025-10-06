@@ -57,9 +57,12 @@ export default function Header() {
                     <div
                         onClick={closeMenu}
                         className={[
-                            "fixed inset-0 z-40 bg-black/40 transition-opacity duration-300 ease-out",
-                            show ? "opacity-100" : "opacity-0",
-                            // 모션 최소화 환경 보정
+                            "fixed inset-0 z-40 " +
+                            // 블러/투명도 애니메이션
+                            "transition-[backdrop-filter,opacity] duration-300 ease-out",
+                            // 열림/닫힘 상태
+                            show ? "backdrop-blur-md opacity-100" : "backdrop-blur-none opacity-0",
+                            // 접근성(모션 최소화)
                             "motion-reduce:transition-none"
                         ].join(" ")}
                     />
