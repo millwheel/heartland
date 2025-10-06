@@ -1,4 +1,4 @@
-export type Message = { id: number; text: string; personalized: boolean };
+import {Message} from "@/data/type";
 
 export const messages: readonly Message[] = [
   { id: 1, text: `오늘도 고마워요`, personalized: false },
