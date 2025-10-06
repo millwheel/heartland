@@ -5,6 +5,7 @@ import {useMemo, useState} from "react";
 import { useRouter } from "next/navigation";
 import { messages, type Message } from "@/data/messages";
 import BottomActionButton from "@/component/bottomActionButton";
+import PostItText from "@/component/postItText";
 
 export default function Detail() {
     const [open, setOpen] = useState(false);
@@ -56,13 +57,7 @@ export default function Detail() {
 
                 {/* open 시 메시지 표시 */}
                 {open && (
-                    <p
-                        className="absolute inset-0 flex items-center justify-center
-                       text-center font-semibold text-stone-800
-                       leading-relaxed p-3 z-20"
-                    >
-                        {displayedText}
-                    </p>
+                    <PostItText text={displayedText} fontSize="" fontWeight="font-semibold" />
                 )}
             </div>
 
