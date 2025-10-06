@@ -4,9 +4,17 @@ import Image from "next/image";
 import { pacifico } from "@/font/pacifico";
 import BottomActionButton from "@/component/bottomActionButton";
 import {useRouter} from "next/navigation";
+import {useEffect, useState} from "react";
+import {loadProfile} from "@/util/profileStorage";
 
 export default function About() {
     const router = useRouter();
+    const [profile, setProfile] = useState<{ name: string } | null>(null);
+
+    useEffect(() => {
+        const loaded = loadProfile();
+        setProfile(loaded);
+    }, []);
 
     const handleButtonClick = () => {
         router.push("/");
@@ -30,7 +38,7 @@ export default function About() {
                 <div className="max-w-2xl text-center font-semibold text-xl text-[#f9e7c4]">
                     <div className="flex-col space-y-2 mb-15">
                         <span className="block">
-                            하트랜드는 ...님의 하루 속에서
+                            하트랜드는 {profile ? `${profile.name}님` : "당신"}의 하루 속에서
                         </span>
                         <span className="block">
                             잠시 멈춰 설 수 있는 작은 섬입니다.

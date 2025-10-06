@@ -1,28 +1,35 @@
 "use client";
 
 import Image from "next/image";
-import {useMemo, useState} from "react";
+import {useEffect, useState} from "react";
 import { useRouter } from "next/navigation";
 import { messages, type Message } from "@/data/messages";
 import BottomActionButton from "@/component/bottomActionButton";
 import PostItText from "@/component/postItText";
+import {loadProfile} from "@/util/profileStorage";
 
 export default function Detail() {
     const [open, setOpen] = useState(false);
-    const [name, setName] = useState<string | null>(null);
+    const [displayedText, setDisplayedText] = useState("");
     const router = useRouter();
 
-    const randomMessage: Message | null = useMemo(() => {
-        if (!messages.length) return null;
-        const i = Math.floor(Math.random() * messages.length);
-        return messages[i]!;
-    }, []);
+    useEffect(() => {
+        const profile = loadProfile();
 
-    const displayedText = useMemo(() => {
-        if (!randomMessage) return "";
-        const prefix = randomMessage.personalized && name ? `${name}, ` : "";
-        return prefix + randomMessage.text;
-    }, [randomMessage, name]);
+        // 랜덤 메시지 선택
+        if (!messages.length) return;
+        const randomIndex = Math.floor(Math.random() * messages.length);
+        const randomMessage: Message = messages[randomIndex]!;
+
+        // 메시지 조합
+        const prefix =
+            randomMessage.personalized && profile?.name
+                ? `${profile.name}님, `
+                : "";
+        const fullText = prefix + randomMessage.text;
+
+        setDisplayedText(fullText);
+    }, []);
 
     const handleButtonClick = () => {
         if (open) {
