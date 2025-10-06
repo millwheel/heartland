@@ -77,7 +77,7 @@ export default function Header() {
                             className={[
                                 "pointer-events-auto",
                                 "bg-[#ffd427] shadow-2xl rounded-b-xl p-3 flex flex-col",
-                                "pt-[max(12px,env(safe-area-inset-top))]",
+                                "pt-[max(12px,env(safe-area-inset-top))] pb-6",
                                 "transition-transform duration-300 ease-out transform-gpu",
                                 show ? "translate-y-0" : "-translate-y-full",
                                 "motion-reduce:transition-none motion-reduce:transform-none",
@@ -102,10 +102,12 @@ export default function Header() {
                                     XANDHEART 홈페이지로 돌아가기
                                 </a>
                             </nav>
+
                         </div>
                     </div>
                 </>
             )}
+
         </header>
     );
 }
