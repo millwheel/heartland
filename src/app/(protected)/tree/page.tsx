@@ -3,20 +3,27 @@
 import Image from "next/image";
 import {useEffect, useState} from "react";
 import { useRouter } from "next/navigation";
-import { messages, type Message } from "@/data/messages";
+import { messages } from "@/data/messages";
 import BottomActionButton from "@/component/bottomActionButton";
 import PostItText from "@/component/postItText";
-import {loadProfile} from "@/util/profileStorage";
+import {loadProfile, loadTodayMessage, saveTodayMessage} from "@/util/profileStorage";
 import FadeOverlay from "@/component/fadeOverlay";
+import {Message} from "@/data/type";
 
-export default function Detail() {
+export default function Tree() {
     const [open, setOpen] = useState(false);
     const [displayedText, setDisplayedText] = useState("");
     const router = useRouter();
     const [leaving, setLeaving] = useState(false);
+    const [alreadySeen, setAlreadySeen] = useState(false);
 
     useEffect(() => {
         const profile = loadProfile();
+        const todaySeenMessage = loadTodayMessage();
+        if (todaySeenMessage) {
+            setAlreadySeen(true);
+            return;
+        }
 
         // 랜덤 메시지 선택
         if (!messages.length) return;
@@ -34,16 +41,34 @@ export default function Detail() {
     }, []);
 
     const handleButtonClick = () => {
-        if (open) {
+        if (alreadySeen) {
             if (leaving) return;
             setLeaving(true);
             setTimeout(() => router.push("/"), 300);
-        } else {
-            setOpen(true);
+            return;
         }
+
+        if (!open) {
+            if (displayedText) {
+                saveTodayMessage({
+                    date: new Date().toLocaleDateString("ko-KR", { timeZone: "Asia/Seoul" }),
+                    text: displayedText,
+                });
+            }
+            setOpen(true);
+            return;
+        }
+
+        if (leaving) return;
+        setLeaving(true);
+        setTimeout(() => router.push("/"), 300);
     };
 
-    const buttonText = open ? "하트랜드로 돌아가기" : "오늘의 메세지 받아보기"
+    const buttonText = alreadySeen
+        ? "하트랜드로 돌아가기"
+        : open
+            ? "하트랜드로 돌아가기"
+            : "오늘의 메세지 받아보기";
 
     return (
         <div className="relative min-h-screen overflow-hidden">
@@ -74,6 +99,17 @@ export default function Detail() {
                     <PostItText text={displayedText} fontSize="" fontWeight="font-semibold" />
                 )}
             </div>
+
+            {alreadySeen && (
+                <div
+                    className="absolute left-1/2 top-[75%] -translate-x-1/2 -translate-y-1/2
+                       bg-white/90 rounded-4xl shadow-md text-center px-3 py-3 min-w-70"
+                >
+                    <p className="text-[#613c00] text-base font-semibold leading-relaxed">
+                        오늘은 이미 함께 나눈 순간이 있네요
+                    </p>
+                </div>
+            )}
 
             <BottomActionButton onClick={handleButtonClick} text={buttonText} position={"bottom-[10%]"} width={"min-w-[250px]"}/>
         </div>
